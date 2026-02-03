@@ -64,7 +64,7 @@ static t_bool	get_number(char **str, t_stacks *node)
  * @param head Head of the stack that will receive new node.
  * @param arg String with number or numbers to be added.
  * @return True if everything went fine, False if any error occured. */
-static t_bool	stack_init(t_stacks **head, char *arg)
+static void	stack_init(t_stacks **head, char *arg)
 {
 	t_stacks	*new;
 
@@ -72,25 +72,38 @@ static t_bool	stack_init(t_stacks **head, char *arg)
 	{
 		new = ft_calloc(1, sizeof(t_stacks));
 		if (!new)
-		{
-			stack_clear(head);
-			return (FALSE);
-		}
-		if (!get_number(&arg, new))
-		{
-			stack_clear(head);
-			return (FALSE);
-		}
+			end_all(*head, NULL, ALLOCATION_ERROR);
 		new->next = NULL;
 		if (head)
 			(ft_lstlast(*head))->next = new;
 		else
 			head = &new;
+		if (!get_number(&arg, new))
+			end_all(*head, NULL, INT_OVERFLOW);
 	}
-	return (TRUE);
 }
 
-/** @brief Transforms each number to  */
+/** @brief Check if any number is duplicated.
+ * If so, exists safely the program.
+ * @param nbr First node with numbers to be checked. */
+static void	duplicate_check(t_stacks *nbr)
+{
+	t_stacks	*tmp;
+	t_stacks	*check;
+
+	tmp = nbr;
+	while (tmp->next)
+	{
+		check = tmp->next;
+		while (check)
+		{
+			if (tmp->nbr == check->nbr)
+				end_all(nbr, NULL, DUPLICATED);
+			check = check->next;
+		}
+		tmp = tmp->next;
+	}
+}
 
 /** @brief Check if content of args are valid, and if so,
  * parse the arg to the stack linked list.
@@ -102,13 +115,11 @@ t_stacks	*parsing(char **args)
 	int			i;
 
 	if (!args || !*args || !valid_args(args))
-		return (NULL);
+		error_msg(INVALID_ARGS);
 	head = NULL;
 	i = -1;
 	while (args[++i])
-	{
-		if (!stack_init(&head, args[i]))
-			return (NULL);
-	}
+		stack_init(&head, args[i]);
+	duplicate_check(head);
 	return (head);
 }
