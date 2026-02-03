@@ -34,14 +34,15 @@ int	swap(t_stacks *stack, char flag)
 int	push(t_stacks **stack_from, t_stacks **stack_to, char flag)
 {
 	t_stacks	*tmp;
-	if (!stack_from)
+
+	if (!*stack_from)
 		return (0);
 	tmp = *stack_from;
-	stack_from = &(*stack_from)->next;
+	*stack_from = (*stack_from)->next;
 	tmp->next = NULL;
 	if (*stack_to)
 		tmp->next = *stack_to;
-	stack_to = &tmp;
+	*stack_to = tmp;
 	if (flag == 'a')
 		return (ft_putendl_fd("pb", 1));
 	return (ft_putendl_fd("pa", 1));
@@ -60,9 +61,9 @@ int	rotate(t_stacks **stack, char flag)
 	if (!(*stack)->next)
 		return (0);
 	tmp = *stack;
-	stack = &(*stack)->next;
+	*stack = (*stack)->next;
 	tmp->next = NULL;
-	ft_lstlast(stack)->next = tmp;
+	ft_lstlast(*stack)->next = tmp;
 	if (flag == 'a')
 		return (ft_putendl_fd("ra", 1));
 	if (flag == 'b')
@@ -82,8 +83,8 @@ int	rev_rotate(t_stacks **stack, char flag)
 	if (!(*stack)->next)
 		return (0);
 	tmp = *stack;
-	stack = tmp->next;
-	ft_lstlast(stack)->next = tmp;
+	*stack = tmp->next;
+	ft_lstlast(*stack)->next = tmp;
 	tmp->next = NULL;
 	if (flag == 'a')
 		return (ft_putendl_fd("rra", 1));
