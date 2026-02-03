@@ -9,7 +9,7 @@
  * @return
  * Amount of chars writted to stdout. 0 in case nothing
  * needs to be written or exist. -1 in case of error. */
-int swap(t_stacks *stack, char flag)
+int	swap(t_stacks *stack, char flag)
 {
 	int	tmp;
 
