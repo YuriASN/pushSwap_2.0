@@ -24,9 +24,9 @@ int	main(int argc, char **argv)
 	t_stacks	*stack_a;
 	t_stacks	*stack_b;
 
-	if (argc < 2)
+	if (argc < 2 || !argv[1][0])
 		error_msg(NO_ARG);
-	stack_a = parsing(argv);
+	stack_a = parsing(&argv[1]);
 	stack_b = NULL;
 	if (!in_order(stack_a, 'a'))
 		sort_stacks(&stack_a, &stack_b);
