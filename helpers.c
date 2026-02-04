@@ -33,6 +33,32 @@ void	end_all(t_stacks *a, t_stacks *b, int err_no)
 		error_msg(err_no);
 }
 
+/** @brief Search for the 2 highest numbers on the stack.
+ * @param stack Stack to search on.
+ * @param h1 Pointer to attribute the highest number.
+ * @param h2 Pointer to attribute the 2nd highest. NULL if you only want one */
+void	get_highest(t_stacks *stack, int *h1, int *h2)
+{
+	t_stacks	*tmp;
+
+	tmp = stack;
+	*h1 = tmp->nbr;
+	if (h2)
+		*h2 = INT_MIN;
+	while (tmp->next)
+	{
+		tmp = tmp->next;
+		if (*h1 < tmp->nbr)
+		{
+			if (h2)
+				*h2 = *h1;
+			*h1 = tmp->nbr;
+		}
+		else if (h2 && (*h2 < tmp->nbr || *h2 == *h1))
+				*h2 = tmp->nbr;
+	}
+}
+
 /** @brief Takes a Stack that is in order but need rotation,
  * chooses which way will rotate with less moves, and do it.
  * @param stack Pointer to the first node of the list.
