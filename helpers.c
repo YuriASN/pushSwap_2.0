@@ -1,36 +1,29 @@
 #include "push_swap.h"
 
-/** @brief Writes on stdout the Error message,
- * and exit the program with the error number received as parameter.
- * @param err_no Number of the error that occured. */
-void	error_msg(int err_no)
-{
-	ft_putendl_fd("Error", 2);
-	exit(err_no);
-}
-
-/** @brief Free both stacks and in case of error exits with err_no.
- * @param a Linked list a to be freed.
- * @param b	Linked List b to be freed.
- * @param err_no Error number to be exited or 0 if no error is found. */
-void	end_all(t_stacks *a, t_stacks *b, int err_no)
+/** @brief Search for the 2 lowest numbers on the stack.
+ * @param stack Stack to search on.
+ * @param l1 Pointer to attribute the lowest number.
+ * @param l2 Pointer to attribute the 2nd lowest. */
+void	get_lowest(t_stacks *stack, int *l1, int *l2)
 {
 	t_stacks	*tmp;
 
-	while (a)
+	tmp = stack;
+	*l1 = tmp->nbr;
+	if (l2)
+		*l2 = INT_MAX;
+	while (tmp->next)
 	{
-		tmp = a->next;
-		free(a);
-		a = tmp;
+		tmp = tmp->next;
+		if (*l1 > tmp->nbr)
+		{
+			if (*l2)
+				*l2 = *l1;
+			*l1 = tmp->nbr;
+		}
+		else if (l2 && (*l2 > tmp->nbr || *l2 == *l1))
+				*l2 = tmp->nbr;
 	}
-	while (b)
-	{
-		tmp = b->next;
-		free(b);
-		b = tmp;
-	}
-	if (err_no)
-		error_msg(err_no);
 }
 
 /** @brief Search for the 2 highest numbers on the stack.
@@ -59,11 +52,32 @@ void	get_highest(t_stacks *stack, int *h1, int *h2)
 	}
 }
 
+/** @brief Return the index of the node that has the given number.
+ * @param stack Linked list to search on.
+ * @param nbr	Number you're looking for.
+ * @return Index of the node that number was found. */
+int	get_index(t_stacks *stack, int nbr)
+{
+	int			i;
+	t_stacks	*tmp;
+
+	i = 0;
+	tmp = stack;
+	while (tmp)
+	{
+		if (tmp->nbr == nbr)
+			return (i);
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
 /** @brief Takes a Stack that is in order but need rotation,
  * chooses which way will rotate with less moves, and do it.
  * @param stack Pointer to the first node of the list.
  * @param id Flag telling if it's stack a or b. */
-static void	best_rotation(t_stacks **stack, char id)
+/*static void	best_rotation(t_stacks **stack, char id)
 {
 	int			i;
 	int			count;
@@ -90,36 +104,51 @@ static void	best_rotation(t_stacks **stack, char id)
 	else						//caso contrario rodo reverso
 		while (i++ < size)
 			rev_rotate(stack, id);
+}*/
+
+/** @brief Takes a Stack and a number that it has, choose wich rotation will use
+ * less moves to put the number at first, and rotate that way.
+ * @param stack	Pointer to the first node of the list.
+ * @param nbr	Number we will put at first.
+ * @param id	Flag telling if it's stack a or b. */
+void	best_rotation(t_stacks **stack, int nbr, char id, t_stacks *error)
+{
+	int			i;
+	int			size;
+
+	size = ft_lstsize(*stack);
+	i = get_index(*stack, nbr);
+	if (!i || !size)
+		return ;
+	if (i <= size)
+		while (i--)
+			rotate(stack, id, error);
+	else
+		while (i++ < size)
+			rev_rotate(stack, id, error);
 }
 
 /** @brief Checks if all the numbers on the stack are in crescent order.
  * If it's in order but need only rotation, already call function to do it.
  * @param stack Linked list to be checked.
+ * @param error If existing, the other linked list to handle errors in write.
+ * If not, send NULL.
  * @return True if is or was put in order, False if not. */
-t_bool	in_order(t_stacks **stack, char id)
+t_bool	in_order(t_stacks **stack, char id, t_stacks *error)
 {
 	t_stacks	*tmp;
 	int			high;
-	int			prev;
 
-	//descubro o maior valor
-	tmp = (*stack)->next;
-	high = (*stack)->nbr;
-	while (tmp)
-	{
-		if (high < tmp->nbr)
-			high = tmp->nbr;
-		tmp = tmp->next;
-	}
+	tmp = *stack;
+	get_highest(*stack, &high, NULL);
 	/* rodo while conferindo se está em ordem exceto
 	quando o maior está sendo comparado com o próximo */
-	tmp = *stack;
 	while (tmp->next)
 	{
 		if (tmp->nbr != high && tmp->nbr > tmp->next->nbr)
 			return (FALSE);
 	}
 	if (((t_stacks *)ft_lstlast(*stack))->nbr != high)
-		best_rotation(&stack, id);
+		best_rotation(stack, high, id, error);
 	return (TRUE);
 }

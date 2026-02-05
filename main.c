@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 		error_msg(NO_ARG);
 	stack_a = parsing(&argv[1]);
 	stack_b = NULL;
-	if (!in_order(stack_a, 'a'))
+	if (!in_order(stack_a, 'a', NULL))
 		sort_stacks(&stack_a, &stack_b);
 	end_all(stack_a, stack_b, 0);
 	return (0);
