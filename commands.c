@@ -108,6 +108,8 @@ void	rev_rotate(t_stacks **stack, char flag, t_stacks *error)
  * @param way TRUE if is normal rotation, FALSE if is reverse. */
 void	double_rotation(t_stacks **a, t_stacks **b, t_bool way)
 {
+	if (!*a || !*b)
+		return ;
 	if (way)
 	{
 		rotate(a, (char)0, b);
