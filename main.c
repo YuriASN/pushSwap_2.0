@@ -22,7 +22,9 @@ int	main(int argc, char **argv)
 	t_stacks	*stack_a;
 	t_stacks	*stack_b;
 
-	if (argc < 2 || !argv[1][0])
+	if (argc < 2)
+		return (0);
+	if (!argv[1][0])
 		error_msg(NO_ARG);
 	stack_a = parsing(&argv[1]);
 	stack_b = NULL;
