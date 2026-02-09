@@ -9,8 +9,6 @@ static void	sort_stacks(t_stacks **a, t_stacks **b)
 	int	size;
 
 	size = ft_lstsize(*a);
-	/*if (size == 2)			//already settle in line 31 in_order()
-		ft_putendl_fd("sa", 1);*/
 	if (size < 3)
 		sort_three(a, b, FALSE);
 	else if (size <= 5)

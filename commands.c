@@ -75,6 +75,7 @@ void	rotate(t_stacks **stack, char flag, t_stacks *error)
 		if (ft_putendl_fd("rb", 1) == -1)
 			end_all(stack, error, WRITE_ERROR);
 }
+
 /** @brief Reverse rotates the stack passing last element to be the first.
  * @param stack	Pointer to the first node of list to rotate.
  * @param flag	Flag with the name of the stack to print the move.

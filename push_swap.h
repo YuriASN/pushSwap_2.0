@@ -12,7 +12,8 @@
 # define INT_OVERFLOW 3
 # define DUPLICATED 4
 # define INVALID_ARGS 5
-# define WRITE_ERROR 6
+# define EMPTY_ARGS 6
+# define WRITE_ERROR 7
 
 typedef int		t_bool;
 typedef struct	s_stacks
@@ -27,6 +28,12 @@ typedef struct	s_stacks
 //PARSE
 
 t_stacks	*parsing(char **args);
+
+//Argument checkers
+
+void		empty_arg(char **args);
+void		valid_args(char **args);
+void		duplicate_check(int nbr, t_stacks *stack);
 
 //Commands
 

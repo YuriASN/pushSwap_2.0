@@ -69,7 +69,7 @@ order the 3 left (if !in_order() -> sort_three()) and push the 2 back */
  * b to a.
  * @param a Pointer to stack a with all the numbers.
  * @param b Pointer to empty stack to receive numbers. */
-void		sort_five(t_stacks **a, t_stacks **b, int size)
+void	sort_five(t_stacks **a, t_stacks **b, int size)
 {
 	t_bool	rotate_b;
 	int		lower1;
@@ -80,7 +80,7 @@ void		sort_five(t_stacks **a, t_stacks **b, int size)
 	if (size == 5 && rotation_amount(*a, lower1) > rotation_amount(*a, lower2))
 	{
 		rotate_b = TRUE;
-		ft_intswap(&lower1, &lower2);	
+		ft_intswap(&lower1, &lower2);
 	}
 	best_rotation(a, lower1, 'a', *b);
 	push(a, b, 'a');

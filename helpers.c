@@ -22,7 +22,7 @@ void	get_lowest(t_stacks *stack, int *l1, int *l2)
 			*l1 = tmp->nbr;
 		}
 		else if (l2 && (*l2 > tmp->nbr || *l2 == *l1))
-				*l2 = tmp->nbr;
+			*l2 = tmp->nbr;
 	}
 }
 
@@ -48,7 +48,7 @@ void	get_highest(t_stacks *stack, int *h1, int *h2)
 			*h1 = tmp->nbr;
 		}
 		else if (h2 && (*h2 < tmp->nbr || *h2 == *h1))
-				*h2 = tmp->nbr;
+			*h2 = tmp->nbr;
 	}
 }
 
@@ -72,39 +72,6 @@ int	get_index(t_stacks *stack, int nbr)
 	}
 	return (i);
 }
-
-/** @brief Takes a Stack that is in order but need rotation,
- * chooses which way will rotate with less moves, and do it.
- * @param stack Pointer to the first node of the list.
- * @param id Flag telling if it's stack a or b. */
-/*static void	best_rotation(t_stacks **stack, char id)
-{
-	int			i;
-	int			count;
-	int			high;
-	int			size;
-	t_stacks	*tmp;
-
-	count = 0;
-	high = (*stack)->nbr;
-	tmp = (*stack)->next;
-	size = ft_lstsize(*stack);
-	while (tmp)
-	{
-		if (high < tmp->nbr)
-		{
-			i = count;			//salvo o index do maior número
-			high = tmp->nbr;
-		}
-		++count;
-	}
-	if (i <= size)				//se p index estiver do meio pra baixo eu rodo
-		while (i--)
-			rotate(stack, id);
-	else						//caso contrario rodo reverso
-		while (i++ < size)
-			rev_rotate(stack, id);
-}*/
 
 /** @brief Takes a Stack and a number that it has, choose wich rotation will use
  * less moves to put the number at first, and rotate that way.
@@ -141,8 +108,6 @@ t_bool	in_order(t_stacks **stack, char id, t_stacks *error)
 
 	tmp = *stack;
 	get_highest(*stack, &high, NULL);
-	/* rodo while conferindo se está em ordem exceto
-	quando o maior está sendo comparado com o próximo */
 	while (tmp->next)
 	{
 		if (tmp->nbr != high && tmp->nbr > tmp->next->nbr)
