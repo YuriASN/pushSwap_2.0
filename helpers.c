@@ -3,7 +3,8 @@
 /** @brief Search for the 2 lowest numbers on the stack.
  * @param stack Stack to search on.
  * @param l1 Pointer to attribute the lowest number.
- * @param l2 Pointer to attribute the 2nd lowest. */
+ * @param l2 Pointer to attribute the 2nd lowest.
+ * NULL if you only need the lowest. */
 void	get_lowest(t_stacks *stack, int *l1, int *l2)
 {
 	t_stacks	*tmp;
