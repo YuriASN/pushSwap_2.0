@@ -37,3 +37,21 @@ External Funtions used:
 
 ## Algorithm
 
+The `in_order()` is called before any algorithm is, and if a stack is in order but just out of place, it already rotates to fix it. For only two numbers, if they're out of order, the function will always fix it.  
+From this point, there are 3 different algorithms to work with different amount of numbers to put in order.  
+
+### Sort Three
+
+Before this command is called, the `in_order()` function was already called. So the cases that numbers are in order but don't have the lowest number on top were already solved.  
+Then it does a check-up in what number is bigger or than the others to see what type of command should be given.  
+*Let's treat the numbers on the current order as **n0**, **n1** and **n2**.*  
+
+|	Case	|	Command	|
+|	----	|	----	|
+| **n0 > n1 && n0 < n2** | Swap 2 first numbers. |
+| **n0 < n1 && n0 < n2** | Swap 2 first numbers and rotate the stack. |
+| **n0 > n1 && n0 > n2** | Rotate the stack and swap 2 first numbers. |
+
+### Sort Five
+This works with five or four numbers, by pushing the 2 (or 1 in case of 4 arguments) lowests numbers to stack b. It will push using the least amount of rotation possible, so if the lowest end on top of stack `b`, it'll be flagged to rotate. The rotation is needed so that when they are pushed back to `a` everything will be already on order.    
+After it'll organize stack `a` by calling `in_order()` and if that didin't solved, it'll call `sort_three()`. Sorthing the three, the `rotate_b` flag, signalizes if a double rotation can be done, using in that case 1 less command. After that, all that's left is to push number(s) in `b` back to `a`.  
