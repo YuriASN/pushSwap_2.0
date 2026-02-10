@@ -48,11 +48,15 @@ void		double_rotation(t_stacks **a, t_stacks **b, t_bool way);
 void		error_msg(int err_no);
 void		end_all(t_stacks *a, t_stacks *b, int err_no);
 
-//Helpers
-
+// Getters
 void		get_lowest(t_stacks *stack, int *l1, int *l2);
 void		get_highest(t_stacks *stack, int *h1, int *h2);
 int			get_index(t_stacks *stack, int nbr);
+int			get_rotation(t_stacks *stack, int nbr);
+
+//Helpers
+
+void		rotate_amount(int rotate);
 void		best_rotation(t_stacks **stack, int nbr, char id, t_stacks *error);
 t_bool		in_order(t_stacks **stack, char id, t_stacks *error);
 
