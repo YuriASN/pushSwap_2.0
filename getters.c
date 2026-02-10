@@ -104,5 +104,5 @@ int	get_rotation(t_stacks *stack, int nbr)
 	}
 	if (i <= size / 2)
 		return (i);
-	return (size - i);
+	return (i - size);
 }
