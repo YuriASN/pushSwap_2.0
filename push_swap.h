@@ -37,10 +37,10 @@ void		duplicate_check(int nbr, t_stacks *stack);
 
 //Commands
 
-void		swap(t_stacks *stack, char flag, t_stacks *error);
-void		push(t_stacks **stack_from, t_stacks **stack_to, char flag);
-void		rotate(t_stacks **stack, char flag, t_stacks *error);
-void		rev_rotate(t_stacks **stack, char flag, t_stacks *error);
+void		swap(t_stacks *stack, char id, t_stacks *error);
+void		push(t_stacks **stack_from, t_stacks **stack_to, char id);
+void		rotate(t_stacks **stack, char id, t_stacks *error);
+void		rev_rotate(t_stacks **stack, char id, t_stacks *error);
 void		double_rotation(t_stacks **a, t_stacks **b, t_bool way);
 
 //End program
@@ -56,7 +56,7 @@ int			get_rotation(t_stacks *stack, int nbr);
 
 //Helpers
 
-void		rotate_amount(int rotate);
+void		rotate_amount(t_stacks **stack, int roll, char id, t_stacks *error);
 void		best_rotation(t_stacks **stack, int nbr, char id, t_stacks *error);
 t_bool		in_order(t_stacks **stack, char id, t_stacks *error);
 
