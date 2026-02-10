@@ -62,6 +62,8 @@ int	get_index(t_stacks *stack, int nbr)
 	int			i;
 	t_stacks	*tmp;
 
+	if (!stack)
+		return (0);
 	i = 0;
 	tmp = stack;
 	while (tmp)
