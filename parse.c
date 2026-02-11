@@ -1,5 +1,26 @@
 #include "push_swap.h"
 
+/** @brief Returns the amount of digits that a number has,
+ * without including the '-' in case of a negative number.
+ * @param n The Number to count the digits from.
+ * @return The amount of digits of the number. */
+static int	get_digits(ssize_t n)
+{
+	int	digits;
+
+	if (n == 0)
+		return (1);
+	if (n < 0)
+		n *= -1;
+	digits = 1;
+	while (n / 10)
+	{
+		digits++;
+		n /= 10;
+	}
+	return (digits);
+}
+
 /** @brief Passes the number (or first number) on str to the nbr at node.
  * And jumps to the end of string, or next value.
  * @param str String where the number is at.
@@ -12,19 +33,27 @@ static t_bool	get_number(char **str, t_stacks *node)
 	int		decimal;
 
 	nbr = ft_atoi(*str);
-	while (ft_isdigit(**str) || **str == '-' || **str == '+')
+	node->nbr = nbr;
+	while (**str == '-' || **str == '+')
 		(*str)++;
 	i = 0;
-	decimal = 10;
-	while (nbr % decimal)
+	decimal = ft_pow(10, get_digits(nbr));
+	if (decimal == 1)
 	{
-		if (*str[--i] - '0' != (nbr % decimal) / (decimal / 10))
+		if (ft_abs(nbr) != **str - '0')
 			return (FALSE);
-		decimal *= 10;
+		return (TRUE);
 	}
+	while (decimal > 9)
+	{
+		if (*str[i++] - '0' != (ft_abs(nbr) % decimal) / (decimal / 10))
+			return (FALSE);
+		decimal /= 10;
+	}
+	while (ft_isdigit(**str))
+		(*str)++;
 	while (ft_isspace(**str))
 		(*str)++;
-	node->nbr = nbr;
 	return (TRUE);
 }
 
@@ -43,13 +72,13 @@ static void	stack_init(t_stacks **head, char *arg)
 		if (!new)
 			end_all(*head, NULL, ALLOCATION_ERROR);
 		new->next = NULL;
-		if (head)
+		if (*head)
 			(stack_last(*head))->next = new;
 		else
 			head = &new;
 		if (!get_number(&arg, new))
 			end_all(*head, NULL, INT_OVERFLOW);
-		duplicate_check(new->nbr, new->next);
+		duplicate_check(new->nbr, *head);
 	}
 }
 
