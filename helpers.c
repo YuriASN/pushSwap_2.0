@@ -1,5 +1,20 @@
 #include "push_swap.h"
 
+/** @brief Returns the last node of the stack list.
+ * @param stack Head of the linked list to find the last node.
+ * @return Pointer to the last node of given list. */
+t_stacks	*stack_last(t_stacks *stack)
+{
+	t_stacks	*tmp;
+
+	if (!stack)
+		return (NULL);
+	tmp = stack;
+	while (tmp->next)
+		tmp = tmp->next;
+	return (tmp);
+}
+
 /** @brief Rotates the stack the amount of times of roll.
  * Rotating reverse if roll is a negative number.
  * @param stack Pointer to linked list to rotate.
@@ -56,7 +71,7 @@ t_bool	in_order(t_stacks **stack, char id, t_stacks *error)
 		if (tmp->nbr != high && tmp->nbr > tmp->next->nbr)
 			return (FALSE);
 	}
-	if (((t_stacks *)ft_lstlast(*stack))->nbr != high)
+	if ((stack_last(*stack))->nbr != high)
 		best_rotation(stack, high, id, error);
 	return (TRUE);
 }

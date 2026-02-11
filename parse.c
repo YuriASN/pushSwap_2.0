@@ -44,7 +44,7 @@ static void	stack_init(t_stacks **head, char *arg)
 			end_all(*head, NULL, ALLOCATION_ERROR);
 		new->next = NULL;
 		if (head)
-			(ft_lstlast(*head))->next = new;
+			(stack_last(*head))->next = new;
 		else
 			head = &new;
 		if (!get_number(&arg, new))

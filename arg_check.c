@@ -64,7 +64,7 @@ void	duplicate_check(int nbr, t_stacks *stack)
 	while (tmp)
 	{
 		if (nbr == tmp->nbr)
-			end_all(nbr, NULL, DUPLICATED);
+			end_all(stack, NULL, DUPLICATED);
 		tmp = tmp->next;
 	}
 }

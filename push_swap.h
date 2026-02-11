@@ -56,6 +56,7 @@ int			get_rotation(t_stacks *stack, int nbr);
 
 //Helpers
 
+t_stacks	*stack_last(t_stacks *stack);
 void		rotate_amount(t_stacks **stack, int roll, char id, t_stacks *error);
 void		best_rotation(t_stacks **stack, int nbr, char id, t_stacks *error);
 t_bool		in_order(t_stacks **stack, char id, t_stacks *error);

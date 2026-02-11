@@ -47,7 +47,7 @@ void	push(t_stacks **stack_from, t_stacks **stack_to, char id)
 		if (ft_putendl_fd("pb", 1) == -1)
 			end_all(*stack_from, *stack_to, WRITE_ERROR);
 	if (ft_putendl_fd("pa", 1) == -1)
-		end_all(stack_from, stack_to, WRITE_ERROR);
+		end_all(*stack_from, *stack_to, WRITE_ERROR);
 }
 
 /** @brief Rotates the stack passing first element to be the last.
@@ -67,7 +67,7 @@ void	rotate(t_stacks **stack, char id, t_stacks *error)
 	tmp = *stack;
 	*stack = (*stack)->next;
 	tmp->next = NULL;
-	ft_lstlast(*stack)->next = tmp;
+	stack_last(*stack)->next = tmp;
 	if (id == 'a')
 		if (ft_putendl_fd("ra", 1) == -1)
 			end_all(stack, error, WRITE_ERROR);
@@ -92,7 +92,7 @@ void	rev_rotate(t_stacks **stack, char id, t_stacks *error)
 		return (0);
 	tmp = *stack;
 	*stack = tmp->next;
-	ft_lstlast(*stack)->next = tmp;
+	stack_last(*stack)->next = tmp;
 	tmp->next = NULL;
 	if (id == 'a')
 		if (ft_putendl_fd("rra", 1) == -1)
