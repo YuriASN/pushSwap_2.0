@@ -18,7 +18,7 @@ void	get_lowest(t_stacks *stack, int *l1, int *l2)
 		tmp = tmp->next;
 		if (*l1 > tmp->nbr)
 		{
-			if (*l2)
+			if (l2)
 				*l2 = *l1;
 			*l1 = tmp->nbr;
 		}
