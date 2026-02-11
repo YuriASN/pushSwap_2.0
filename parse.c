@@ -4,17 +4,16 @@
  * And jumps to the end of string, or next value.
  * @param str String where the number is at.
  * @param node The node to receive the value.
- * @return True if number was passed, False if number exceeds int min or max.
- */
+ * @return True if number was passed, False if number exceeds int min or max. */
 static t_bool	get_number(char **str, t_stacks *node)
 {
 	ssize_t	nbr;
 	int		i;
 	int		decimal;
 
-	nbr = ft_atoi(**str);
+	nbr = ft_atoi(*str);
 	while (ft_isdigit(**str) || **str == '-' || **str == '+')
-		**str++;
+		(*str)++;
 	i = 0;
 	decimal = 10;
 	while (nbr % decimal)
@@ -24,7 +23,8 @@ static t_bool	get_number(char **str, t_stacks *node)
 		decimal *= 10;
 	}
 	while (ft_isspace(**str))
-		**str++;
+		(*str)++;
+	node->nbr = nbr;
 	return (TRUE);
 }
 

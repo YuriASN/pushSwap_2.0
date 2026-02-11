@@ -44,7 +44,7 @@ static int	rotation_amount(t_stacks *stack, int nbr)
 
 	i = 0;
 	tmp = stack;
-	size = ft_lstsize(stack);
+	size = ft_lstsize((t_list *)stack);
 	while (tmp)
 	{
 		if (stack->nbr == nbr)

@@ -61,9 +61,10 @@ void		rotate_amount(t_stacks **stack, int roll, char id, t_stacks *error);
 void		best_rotation(t_stacks **stack, int nbr, char id, t_stacks *error);
 t_bool		in_order(t_stacks **stack, char id, t_stacks *error);
 
-//Order small amounts
+//Order
 
 void		sort_three(t_stacks **a, t_stacks **b, t_bool rotate_b);
 void		sort_five(t_stacks **a, t_stacks **b, int size);
+void		sort_big(t_stacks **a, t_stacks **b);
 
 #endif

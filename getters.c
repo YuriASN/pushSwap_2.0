@@ -90,7 +90,7 @@ int	get_rotation(t_stacks *stack, int nbr)
 	t_stacks	*tmp;
 
 	tmp = stack;
-	size = ft_lstsize(stack);
+	size = ft_lstsize((t_list *)stack);
 	i = 0;
 	last = (stack_last(tmp))->nbr;
 	while (tmp)

@@ -26,7 +26,7 @@ static void	best_push(t_stacks **a, t_stacks **b)
 		tmp = tmp->next;
 		++i;
 	}
-	best_rotation(b, nbr, 'b', a);
+	best_rotation(b, nbr, 'b', *a);
 	rotate_amount(a, get_rotation(*a, nbr), 'a', *b);
 	push(b, a, 'b');
 }
@@ -101,7 +101,7 @@ void	sort_big(t_stacks **a, t_stacks **b)
 	int	*non_lis;
 	int	lis_size;
 
-	non_lis = ft_calloc((size_t)ft_lstsize(*a), sizeof(int *));
+	non_lis = ft_calloc((size_t)ft_lstsize((t_list *)*a), sizeof(int *));
 	lis_size = get_lis(*a, non_lis);
 	push_lis(a, b, non_lis, lis_size);
 	free(non_lis);

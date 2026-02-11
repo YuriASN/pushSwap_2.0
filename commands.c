@@ -70,10 +70,10 @@ void	rotate(t_stacks **stack, char id, t_stacks *error)
 	stack_last(*stack)->next = tmp;
 	if (id == 'a')
 		if (ft_putendl_fd("ra", 1) == -1)
-			end_all(stack, error, WRITE_ERROR);
+			end_all(*stack, error, WRITE_ERROR);
 	if (id == 'b')
 		if (ft_putendl_fd("rb", 1) == -1)
-			end_all(stack, error, WRITE_ERROR);
+			end_all(*stack, error, WRITE_ERROR);
 }
 
 /** @brief Reverse rotates the stack passing last element to be the first.
@@ -89,18 +89,17 @@ void	rev_rotate(t_stacks **stack, char id, t_stacks *error)
 	t_stacks	*tmp;
 
 	if (!(*stack)->next)
-		return (0);
+		return ;
 	tmp = *stack;
 	*stack = tmp->next;
 	stack_last(*stack)->next = tmp;
 	tmp->next = NULL;
 	if (id == 'a')
 		if (ft_putendl_fd("rra", 1) == -1)
-			end_all(stack, error, WRITE_ERROR);
+			end_all(*stack, error, WRITE_ERROR);
 	if (id == 'b')
 		if (ft_putendl_fd("rrb", 1) == -1)
-			end_all(stack, error, WRITE_ERROR);
-	return (0);
+			end_all(*stack, error, WRITE_ERROR);
 }
 
 /** @brief Do the double rotation to the side decided by the id.
@@ -113,15 +112,15 @@ void	double_rotation(t_stacks **a, t_stacks **b, t_bool way)
 		return ;
 	if (way)
 	{
-		rotate(a, (char)0, b);
-		rotate(b, (char)0, a);
+		rotate(a, (char)0, *b);
+		rotate(b, (char)0, *a);
 		if (ft_putendl_fd("rr", 2) == -1)
 			end_all(*a, *b, WRITE_ERROR);
 	}
 	else
 	{
-		rev_rotate(a, (char)0, b);
-		rev_rotate(b, (char)0, a);
+		rev_rotate(a, (char)0, *b);
+		rev_rotate(b, (char)0, *a);
 		if (ft_putendl_fd("rrr", 2) == -1)
 			end_all(*a, *b, WRITE_ERROR);
 	}

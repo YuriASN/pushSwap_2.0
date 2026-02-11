@@ -41,7 +41,7 @@ void	best_rotation(t_stacks **stack, int nbr, char id, t_stacks *error)
 	int			i;
 	int			size;
 
-	size = ft_lstsize(*stack);
+	size = ft_lstsize((t_list *)*stack);
 	i = get_index(*stack, nbr);
 	if (!i || !size)
 		return ;

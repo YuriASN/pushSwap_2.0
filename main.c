@@ -8,7 +8,7 @@ static void	sort_stacks(t_stacks **a, t_stacks **b)
 {
 	int	size;
 
-	size = ft_lstsize(*a);
+	size = ft_lstsize((t_list *)*a);
 	if (size < 3)
 		sort_three(a, b, FALSE);
 	else if (size <= 5)
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 		error_msg(NO_ARG);
 	stack_a = parsing(&argv[1]);
 	stack_b = NULL;
-	if (!in_order(stack_a, 'a', NULL))
+	if (!in_order(&stack_a, 'a', NULL))
 		sort_stacks(&stack_a, &stack_b);
 	end_all(stack_a, stack_b, 0);
 	return (0);
