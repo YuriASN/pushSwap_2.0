@@ -8,14 +8,13 @@ void	empty_arg(char **args)
 	int	i;
 	int	j;
 
-	i = -1;
 	j = -1;
 	while (args[++j])
 	{
-		while (args[j][++i])
-			if (!ft_isspace(args[j][i]))
-				break ;
-		if (!args[j][++i])
+		i = 0;
+		while (args[j][i] && ft_isspace(args[j][i]))
+				++i ;
+		if (!args[j][i])
 			error_msg(EMPTY_ARGS);
 	}
 }

@@ -70,6 +70,7 @@ t_bool	in_order(t_stacks **stack, char id, t_stacks *error)
 	{
 		if (tmp->nbr != high && tmp->nbr > tmp->next->nbr)
 			return (FALSE);
+		tmp = tmp->next;
 	}
 	if ((stack_last(*stack))->nbr != high)
 		best_rotation(stack, high, id, error);
