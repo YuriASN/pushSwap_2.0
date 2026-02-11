@@ -87,12 +87,16 @@ void	rotate(t_stacks **stack, char id, t_stacks *error)
 void	rev_rotate(t_stacks **stack, char id, t_stacks *error)
 {
 	t_stacks	*tmp;
+	t_stacks	*last;
 
 	if (!(*stack)->next)
 		return ;
+	last = stack_last(*stack);
 	tmp = *stack;
-	*stack = tmp->next;
-	stack_last(*stack)->next = tmp;
+	while (tmp->next != last)
+		tmp = tmp->next;
+	last->next = *stack;
+	*stack = last;
 	tmp->next = NULL;
 	if (id == 'a')
 		if (ft_putendl_fd("rra", 1) == -1)
