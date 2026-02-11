@@ -43,10 +43,10 @@ void	best_rotation(t_stacks **stack, int nbr, char id, t_stacks *error)
 
 	size = ft_lstsize((t_list *)*stack);
 	i = get_index(*stack, nbr);
-	if (!size)
+	if (!i || !size)
 		return ;
-	if (i < size / 2)
-		while (i-- > -1)
+	if (i <= size / 2)
+		while (i--)
 			rotate(stack, id, error);
 	else
 		while (i++ < size)
@@ -63,9 +63,11 @@ t_bool	in_order(t_stacks **stack, char id, t_stacks *error)
 {
 	t_stacks	*tmp;
 	int			high;
+	int			low;
 
 	tmp = *stack;
 	get_highest(*stack, &high, NULL);
+	get_lowest(*stack, &low, NULL);
 	while (tmp->next)
 	{
 		if (tmp->nbr != high && tmp->nbr > tmp->next->nbr)
@@ -75,6 +77,6 @@ t_bool	in_order(t_stacks **stack, char id, t_stacks *error)
 	if (tmp->nbr != high && tmp->nbr > (*stack)->nbr)
 		return (FALSE);
 	if ((stack_last(*stack))->nbr != high)
-		best_rotation(stack, high, id, error);
+		best_rotation(stack, low, id, error);
 	return (TRUE);
 }
