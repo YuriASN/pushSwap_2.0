@@ -1,26 +1,5 @@
 #include "push_swap.h"
 
-/** @brief Returns the amount of digits that a number has,
- * without including the '-' in case of a negative number.
- * @param n The Number to count the digits from.
- * @return The amount of digits of the number. */
-static int	get_digits(ssize_t n)
-{
-	int	digits;
-
-	if (n == 0)
-		return (1);
-	if (n < 0)
-		n *= -1;
-	digits = 1;
-	while (n / 10)
-	{
-		digits++;
-		n /= 10;
-	}
-	return (digits);
-}
-
 /** @brief Passes the number (or first number) on str to the nbr at node.
  * And jumps to the end of string, or next value.
  * @param str String where the number is at.
@@ -28,28 +7,14 @@ static int	get_digits(ssize_t n)
  * @return True if number was passed, False if number exceeds int min or max. */
 static t_bool	get_number(char **str, t_stacks *node)
 {
-	ssize_t	nbr;
-	int		i;
-	int		decimal;
+	int		nbr;
 
+	if (ft_atoi_overflow(*str))
+		return (FALSE);
 	nbr = ft_atoi(*str);
 	node->nbr = nbr;
 	while (**str == '-' || **str == '+')
 		(*str)++;
-	i = 0;
-	decimal = ft_pow(10, get_digits(nbr));
-	if (decimal == 1)
-	{
-		if (ft_abs(nbr) != **str - '0')
-			return (FALSE);
-		return (TRUE);
-	}
-	while (decimal > 9)
-	{
-		if (*str[i++] - '0' != (ft_abs(nbr) % decimal) / (decimal / 10))
-			return (FALSE);
-		decimal /= 10;
-	}
 	while (ft_isdigit(**str))
 		(*str)++;
 	while (ft_isspace(**str))
@@ -57,29 +22,31 @@ static t_bool	get_number(char **str, t_stacks *node)
 	return (TRUE);
 }
 
-/** @brief Passes arg to a node, and link it to head
- * and check if it's value is duplicated.
- * @param head Head of the stack that will receive new node.
+/** @brief Passes args to nodes, checking if it's value is duplicated
+ * and return the head of linked list.
  * @param arg String with number or numbers to be added.
- * @return True if everything went fine, False if any error occured. */
-static void	stack_init(t_stacks **head, char *arg)
+ * @return Head of the linked list created. */
+static t_stacks	*stack_init(char *arg)
 {
+	t_stacks	*head;
 	t_stacks	*new;
 
+	head = NULL;
 	while (*arg)
 	{
 		new = ft_calloc(1, sizeof(t_stacks));
 		if (!new)
-			end_all(*head, NULL, ALLOCATION_ERROR);
+			end_all(head, NULL, ALLOCATION_ERROR);
 		new->next = NULL;
-		if (*head)
-			(stack_last(*head))->next = new;
+		if (head)
+			(stack_last(head))->next = new;
 		else
-			head = &new;
+			head = new;
 		if (!get_number(&arg, new))
-			end_all(*head, NULL, INT_OVERFLOW);
-		duplicate_check(new->nbr, *head);
+			end_all(head, NULL, INT_OVERFLOW);
+		duplicate_check(new->nbr, head);
 	}
+	return (head);
 }
 
 /** @brief Check if content of args are valid, and if so,
@@ -96,9 +63,9 @@ t_stacks	*parsing(char **args)
 		error_msg(INVALID_ARGS);
 	empty_arg(args);
 	valid_args(args);
-	head = NULL;
-	i = -1;
+	head = stack_init(args[0]);
+	i = 0;
 	while (args[++i])
-		stack_init(&head, args[i]);
+		stack_last(head)->next = stack_init(args[i]);
 	return (head);
 }

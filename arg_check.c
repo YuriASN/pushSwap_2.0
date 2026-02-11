@@ -52,8 +52,8 @@ void	valid_args(char **args)
 	}
 }
 
-/** @brief Check if any number is duplicated.
- * If so, exists safely the program.
+/** @brief Check if any number is duplicated, without checking the last,
+ * as it's where nbr comes from. If so, exists safely the program.
  * @param nbr Number on first node to compared with others.
  * @param stack Second node of the stack, to compare from it, to the end.*/
 void	duplicate_check(int nbr, t_stacks *stack)
@@ -61,7 +61,7 @@ void	duplicate_check(int nbr, t_stacks *stack)
 	t_stacks	*tmp;
 
 	tmp = stack;
-	while (tmp)
+	while (tmp->next)
 	{
 		if (nbr == tmp->nbr)
 			end_all(stack, NULL, DUPLICATED);
