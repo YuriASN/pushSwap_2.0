@@ -46,8 +46,9 @@ void	push(t_stacks **stack_from, t_stacks **stack_to, char id)
 	if (id == 'a')
 		if (ft_putendl_fd("pb", 1) == -1)
 			end_all(*stack_from, *stack_to, WRITE_ERROR);
-	if (ft_putendl_fd("pa", 1) == -1)
-		end_all(*stack_from, *stack_to, WRITE_ERROR);
+	if (id == 'b')
+		if (ft_putendl_fd("pa", 1) == -1)
+			end_all(*stack_from, *stack_to, WRITE_ERROR);
 }
 
 /** @brief Rotates the stack passing first element to be the last.
