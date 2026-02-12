@@ -2,7 +2,6 @@
 # define PUSH_SWAP_H
 
 # include "libft/libft.h"
-# include <limits.h>
 # define TRUE 1
 # define FALSE 0
 
@@ -66,5 +65,10 @@ t_bool		in_order(t_stacks **stack, char id, t_stacks *error);
 void		sort_three(t_stacks **a, t_stacks **b, t_bool rotate_b);
 void		sort_five(t_stacks **a, t_stacks **b, int size);
 void		sort_big(t_stacks **a, t_stacks **b);
+
+//Longest Increasing Subsequence
+
+int			get_lis(t_stacks *a, int *lis);
+void		push_lis(t_stacks **a, t_stacks **b, int *lis, int size);
 
 #endif
