@@ -1,7 +1,7 @@
 NAME = push_swap
 
 SRC = arg_check.c	commands.c	end_prog.c	getters.c	helpers.c \
-		main.c	order_big.c	order_small.c	parse.c
+		main.c	order_big.c	order_small.c	parse.c		lis.c
 
 OBJ = $(SRC:.c=.o)
 DEPENDENCY = -Llibft -lft
