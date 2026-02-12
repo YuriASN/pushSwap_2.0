@@ -47,7 +47,7 @@ static void	push_lis(t_stacks **a, t_stacks **b, int *non_lis, int lis_size)
 			if ((*a)->nbr == non_lis[i])
 			{
 				push(a, b, 'a');//need to figure out non_lis free in case commands fail (-1 on write)
-				ft_memmove(&non_lis[i], &non_lis[i + 1], lis_size - i);
+				ft_memmove(&non_lis[i], &non_lis[i + 1], (lis_size - i) * sizeof(int));
 				lis_size--;
 				break ;
 			}
@@ -107,4 +107,5 @@ void	sort_big(t_stacks **a, t_stacks **b)
 	free(non_lis);
 	while (*b)
 		best_push(a, b);
+	in_order(a, 'a', *b);
 }
