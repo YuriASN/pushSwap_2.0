@@ -9,7 +9,7 @@ static void	sort_stacks(t_stacks **a, t_stacks **b)
 	int	size;
 
 	size = ft_lstsize((t_list *)*a);
-	if (size < 3)
+	if (size <= 3)
 		sort_three(a, b, FALSE);
 	else if (size <= 5)
 		sort_five(a, b, size);
