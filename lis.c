@@ -68,6 +68,12 @@ static t_bool next_better(t_stacks *curr, int last_low, t_stacks *head, int firs
 	return (FALSE);
 }
 
+/** @brief Finds the LIS starting on a given node,
+ * saving on lis, all the numbers that are part of it.
+ * @param a Current node of a linked list to find it's LIS.
+ * @param lis Array of int to save the numbers that are in sequence. 
+ * @param head The head of the linked list.
+ * @return The size of the array created with the LIS numbers. */
 static int	lis_per_node(t_stacks *a, int *lis, t_stacks *head)
 {
 	int			last_low;
@@ -96,8 +102,9 @@ static int	lis_per_node(t_stacks *a, int *lis, t_stacks *head)
 	return (i + 1);
 }
 
-/** @brief Finds the Longest Increasing Subsequence on stack a, 
- * saving on lis, all the numbers that are part of it.
+/** @brief Finds the best Longest Increasing Subsequence on linked list.
+ * Searches for the LIS starting on each node to see wich one will have
+ * a bigger list.
  * @param a Linked list to search for the LIS.
  * @param lis Array of int to save the numbers that are in sequence. 
  * @return The size of the array created with the LIS numbers. */
