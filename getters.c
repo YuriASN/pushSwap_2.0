@@ -84,25 +84,25 @@ int	get_index(t_stacks *stack, int nbr)
  * to find the place. */
 int	get_rotation(t_stacks *stack, int nbr)
 {
-	int			i;
-	int			last;
+	int			last_value;
+	int			rotate;
 	int			size;
 	t_stacks	*tmp;
 
 	tmp = stack;
+	rotate = 0;
+	last_value = stack_last(stack)->nbr;
 	size = ft_lstsize((t_list *)stack);
-	i = 0;
-	last = (stack_last(tmp))->nbr;
 	while (tmp)
 	{
-		if ((nbr < tmp->nbr && nbr > last)
-			|| (nbr < tmp->nbr && tmp->nbr > last && nbr > last))
+		if ((nbr < tmp->nbr && (last_value > tmp->nbr || nbr > last_value))
+			|| (last_value > tmp->nbr && nbr > last_value))
 			break ;
-		last = tmp->nbr;
+		last_value = tmp->nbr;
+		++rotate;
 		tmp = tmp->next;
-		i++;
 	}
-	if (i <= size / 2)
-		return (i);
-	return (i - size);
+	if (rotate <= size / 2)
+		return (rotate);
+	return (rotate - size);
 }
