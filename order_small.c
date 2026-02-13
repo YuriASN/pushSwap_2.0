@@ -31,34 +31,6 @@ void	sort_three(t_stk **a, t_stk **b, t_bool rotate_b)
 	}
 }
 
-/** @brief Returns the amount of rotation or reverse rotation (the closest one)
- * needed to get to a number on the top of a stack.
- * @param stack Stack to find number on it.
- * @param nbr	Number you're looking to be at top of stack.
- * @return 		Amount of rotation needed to put nbr on top. */
-static int	rotation_amount(t_stk *stack, int nbr)
-{
-	int		i;
-	int		size;
-	t_stk	*tmp;
-
-	i = 0;
-	tmp = stack;
-	size = ft_lstsize((t_list *)stack);
-	while (tmp)
-	{
-		if (stack->nbr == nbr)
-		{
-			if (i > size / 2)
-				i = size - i;
-			return (i);
-		}
-		tmp = tmp->next;
-		++i;
-	}
-	return (i);
-}
-
 /*to order five we need to push 2 lowest numbers to the other side,
 if they are in crescent order there, we need to rotate,
 better to do double rotation to reduce one move,
@@ -77,16 +49,16 @@ void	sort_five(t_stk **a, t_stk **b, int size)
 
 	rotate_b = FALSE;
 	get_lowest(*a, &lower1, &lower2);
-	if (size == 5 && rotation_amount(*a, lower1) > rotation_amount(*a, lower2))
+	if (size == 5 && best_rotation(*a, lower1) > best_rotation(*a, lower2))
 	{
 		rotate_b = TRUE;
 		ft_intswap(&lower1, &lower2);
 	}
-	best_rotation(a, lower1, 'a', *b);
+	rotate_amount(a, best_rotation(*a, lower1), 'a', *b);
 	push(a, b, 'a');
 	if (size == 5)
 	{
-		best_rotation(a, lower2, 'a', *b);
+		rotate_amount(a, best_rotation(*a, lower2), 'a', *b);
 		push(a, b, 'a');
 	}
 	if (!in_order(a, 'a', *b))

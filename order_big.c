@@ -17,7 +17,7 @@ static void	best_push(t_stk **a, t_stk **b)
 	i = 0;
 	while (tmp)
 	{
-		moves = (int)ft_abs(get_rotation(*a, tmp->nbr)) + i;
+		moves = (int)ft_abs(push_rotation(*a, tmp->nbr)) + i;
 		if (moves < lowest_move)
 		{
 			lowest_move = moves;
@@ -26,8 +26,8 @@ static void	best_push(t_stk **a, t_stk **b)
 		tmp = tmp->next;
 		++i;
 	}
-	best_rotation(b, nbr, 'b', *a);
-	rotate_amount(a, get_rotation(*a, nbr), 'a', *b);
+	rotate_amount(b , best_rotation(*b, nbr), 'b', *a);	//
+	rotate_amount(a, push_rotation(*a, nbr), 'a', *b);	//
 	push(b, a, 'b');
 }
 

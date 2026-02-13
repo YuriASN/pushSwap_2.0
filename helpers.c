@@ -32,25 +32,23 @@ void	rotate_amount(t_stk **stack, int roll, char id, t_stk *error)
 }
 
 /** @brief Takes a Stack and a number that it has, choose wich rotation will use
- * less moves to put the number at first, and rotate that way.
+ * less moves to put the number at first, return the amount of rotations needed.
  * @param stack	Pointer to the first node of the list.
  * @param nbr	Number we will put at first.
- * @param id	Flag telling if it's stack a or b. */
-void	best_rotation(t_stk **stack, int nbr, char id, t_stk *error)
+ * @return Amount of rotation or rev rotation (negative) needed. */
+int	best_rotation(t_stk *stack, int nbr)
 {
 	int			i;
 	int			size;
 
-	size = ft_lstsize((t_list *)*stack);
-	i = get_index(*stack, nbr);
+	size = ft_lstsize((t_list *)stack);
+	i = get_index(stack, nbr);
 	if (!i || !size)
-		return ;
+		return (0);
 	if (i <= size / 2)
-		while (i--)
-			rotate(stack, id, error);
+		return (i);
 	else
-		while (i++ < size)
-			rev_rotate(stack, id, error);
+		return (i - size);
 }
 
 /** @brief Checks if all the numbers on the stack are in crescent order.
@@ -77,6 +75,6 @@ t_bool	in_order(t_stk **stack, char id, t_stk *error)
 	if (tmp->nbr != high && tmp->nbr > (*stack)->nbr)
 		return (FALSE);
 	if ((stack_last(*stack))->nbr != high)
-		best_rotation(stack, low, id, error);
+		rotate_amount(stack, best_rotation(*stack, low), id, error);
 	return (TRUE);
 }

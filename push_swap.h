@@ -17,9 +17,7 @@
 typedef int		t_bool;
 typedef struct	s_stacks
 {
-	//char			id;
 	int				nbr;
-	//struct s_stacks	*prev;
 	struct s_stacks	*next;
 }		t_stk;
 
@@ -50,13 +48,13 @@ void	end_all(t_stk *a, t_stk *b, int err_no);
 void	get_lowest(t_stk *stack, int *l1, int *l2);
 void	get_highest(t_stk *stack, int *h1, int *h2);
 int		get_index(t_stk *stack, int nbr);
-int		get_rotation(t_stk *stack, int nbr);
+int		push_rotation(t_stk *stack, int nbr);
 
 //Helpers
 
 t_stk	*stack_last(t_stk *stack);
 void	rotate_amount(t_stk **stack, int roll, char id, t_stk *error);
-void	best_rotation(t_stk **stack, int nbr, char id, t_stk *error);
+int		best_rotation(t_stk *stack, int nbr);
 t_bool	in_order(t_stk **stack, char id, t_stk *error);
 
 //Order

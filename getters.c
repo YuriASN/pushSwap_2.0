@@ -82,7 +82,7 @@ int	get_index(t_stk *stack, int nbr)
  * @param nbr	Number to be put on right location in stack.
  * @return Amount of rotation (or reverse) the stack had to do
  * to find the place. */
-int	get_rotation(t_stk *stack, int nbr)
+int	push_rotation(t_stk *stack, int nbr)
 {
 	int		last_value;
 	int		rotate;
