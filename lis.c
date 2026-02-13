@@ -23,7 +23,7 @@ static t_bool	is_on_lis(int nbr, int *lis, int size)
  * @param b Pointer to the first node of the list to push for.
  * @param lis Array of int not to be pushed.
  * @param size Size of array of ints. */
-void	push_lis(t_stacks **a, t_stacks **b, int *lis, int size)
+void	push_lis(t_stk **a, t_stk **b, int *lis, int size)
 {
 	int	a_size;
 	int	pushes;
@@ -51,7 +51,7 @@ void	push_lis(t_stacks **a, t_stacks **b, int *lis, int size)
  * @param head First node of the stack.
  * @param first Value of first node that was searched on.
  * @return True if next number is a better option, False if not. */
-static t_bool next_better(t_stacks *curr, int last_low, t_stacks *head, int first)
+static t_bool	next_better(t_stk *curr, int last_low, t_stk *head, int first)
 {
 	int	curr_nbr;
 	int	next_number;
@@ -74,12 +74,12 @@ static t_bool next_better(t_stacks *curr, int last_low, t_stacks *head, int firs
  * @param lis Array of int to save the numbers that are in sequence. 
  * @param head The head of the linked list.
  * @return The size of the array created with the LIS numbers. */
-static int	lis_per_node(t_stacks *a, int *lis, t_stacks *head)
+static int	lis_per_node(t_stk *a, int *lis, t_stk *head)
 {
-	int			last_low;
-	int			first;
-	int			i;
-	t_stacks	*tmp;
+	int		last_low;
+	int		first;
+	int		i;
+	t_stk	*tmp;
 
 	i = -1;
 	tmp = a->next;
@@ -108,12 +108,12 @@ static int	lis_per_node(t_stacks *a, int *lis, t_stacks *head)
  * @param a Linked list to search for the LIS.
  * @param lis Array of int to save the numbers that are in sequence. 
  * @return The size of the array created with the LIS numbers. */
-int	get_lis(t_stacks *a, int *lis)
+int	get_lis(t_stk *a, int *lis)
 {
-	t_stacks	*tmp;
-	t_stacks	*best_node;
-	int			longest_lis;
-	int			lis_size;
+	t_stk	*tmp;
+	t_stk	*best_node;
+	int		longest_lis;
+	int		lis_size;
 
 	if (!a)
 		return (0);

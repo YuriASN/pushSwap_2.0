@@ -3,9 +3,9 @@
 /** @brief Returns the last node of the stack list.
  * @param stack Head of the linked list to find the last node.
  * @return Pointer to the last node of given list. */
-t_stacks	*stack_last(t_stacks *stack)
+t_stk	*stack_last(t_stk *stack)
 {
-	t_stacks	*tmp;
+	t_stk	*tmp;
 
 	if (!stack)
 		return (NULL);
@@ -21,14 +21,14 @@ t_stacks	*stack_last(t_stacks *stack)
  * @param roll Amount of rotations need to be done.
  * @param id Id of the stack being rotated.
  * @param error The other linked list to work with it in case of error. */
-void	rotate_amount(t_stacks **stack, int roll, char id, t_stacks *error)
+void	rotate_amount(t_stk **stack, int roll, char id, t_stk *error)
 {
-		if (roll > 0)
-			while (roll--)
-				rotate(stack, id, error);
-		else
-			while (roll++)
-				rev_rotate(stack, id, error);
+	if (roll > 0)
+		while (roll--)
+			rotate(stack, id, error);
+	else
+		while (roll++)
+			rev_rotate(stack, id, error);
 }
 
 /** @brief Takes a Stack and a number that it has, choose wich rotation will use
@@ -36,7 +36,7 @@ void	rotate_amount(t_stacks **stack, int roll, char id, t_stacks *error)
  * @param stack	Pointer to the first node of the list.
  * @param nbr	Number we will put at first.
  * @param id	Flag telling if it's stack a or b. */
-void	best_rotation(t_stacks **stack, int nbr, char id, t_stacks *error)
+void	best_rotation(t_stk **stack, int nbr, char id, t_stk *error)
 {
 	int			i;
 	int			size;
@@ -59,11 +59,11 @@ void	best_rotation(t_stacks **stack, int nbr, char id, t_stacks *error)
  * @param error If existing, the other linked list to handle errors in write.
  * If not, send NULL.
  * @return True if is or was put in order, False if not. */
-t_bool	in_order(t_stacks **stack, char id, t_stacks *error)
+t_bool	in_order(t_stk **stack, char id, t_stk *error)
 {
-	t_stacks	*tmp;
-	int			high;
-	int			low;
+	t_stk	*tmp;
+	int		high;
+	int		low;
 
 	tmp = *stack;
 	get_highest(*stack, &high, NULL);

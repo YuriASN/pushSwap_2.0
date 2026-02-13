@@ -13,9 +13,9 @@ void	error_msg(int err_no)
  * @param a Linked list a to be freed.
  * @param b	Linked List b to be freed.
  * @param err_no Error number to be exited or 0 if no error is found. */
-void	end_all(t_stacks *a, t_stacks *b, int err_no)
+void	end_all(t_stk *a, t_stk *b, int err_no)
 {
-	t_stacks	*tmp;
+	t_stk	*tmp;
 
 	while (a)
 	{

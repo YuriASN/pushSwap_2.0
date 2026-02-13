@@ -5,7 +5,7 @@
  * @param a Stack to sort numbers.
  * @param b Stack to rotate together, or NULL if only one stack exists.
  * @param rotate_b Flag to see if b needs rotation */
-void	sort_three(t_stacks **a, t_stacks **b, t_bool rotate_b)
+void	sort_three(t_stk **a, t_stk **b, t_bool rotate_b)
 {
 	if ((*a)->nbr > (*a)->next->nbr && (*a)->nbr < (*a)->next->next->nbr)
 	{
@@ -36,11 +36,11 @@ void	sort_three(t_stacks **a, t_stacks **b, t_bool rotate_b)
  * @param stack Stack to find number on it.
  * @param nbr	Number you're looking to be at top of stack.
  * @return 		Amount of rotation needed to put nbr on top. */
-static int	rotation_amount(t_stacks *stack, int nbr)
+static int	rotation_amount(t_stk *stack, int nbr)
 {
-	int			i;
-	int			size;
-	t_stacks	*tmp;
+	int		i;
+	int		size;
+	t_stk	*tmp;
 
 	i = 0;
 	tmp = stack;
@@ -69,7 +69,7 @@ order the 3 left (if !in_order() -> sort_three()) and push the 2 back */
  * b to a.
  * @param a Pointer to stack a with all the numbers.
  * @param b Pointer to empty stack to receive numbers. */
-void	sort_five(t_stacks **a, t_stacks **b, int size)
+void	sort_five(t_stk **a, t_stk **b, int size)
 {
 	t_bool	rotate_b;
 	int		lower1;

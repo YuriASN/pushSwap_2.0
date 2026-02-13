@@ -4,13 +4,13 @@
  * amount of moves in between them all.
  * @param a Pointer to linked list with stack a.
  * @param b Pointer to linked list with stack b. */
-static void	best_push(t_stacks **a, t_stacks **b)
+static void	best_push(t_stk **a, t_stk **b)
 {
-	t_stacks	*tmp;
-	int			nbr;
-	int			i;
-	int			moves;
-	int			lowest_move;
+	t_stk	*tmp;
+	int		nbr;
+	int		i;
+	int		moves;
+	int		lowest_move;
 
 	lowest_move = INT_MAX;
 	tmp = *b;
@@ -36,7 +36,7 @@ static void	best_push(t_stacks **a, t_stacks **b)
  * And call helper to push them back in order.
  * @param a Pointer to first node of stack A.
  * @param b Pointer to first node of stack B. */
-void	sort_big(t_stacks **a, t_stacks **b)
+void	sort_big(t_stk **a, t_stk **b)
 {
 	int	*lis;
 	int	lis_size;

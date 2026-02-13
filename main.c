@@ -4,7 +4,7 @@
  * choose the best algorithm to work with the list size. 
  * @param a Pointer to stack with numbers received by the program.
  * @param b	Pointer to empty stack. */
-static void	sort_stacks(t_stacks **a, t_stacks **b)
+static void	sort_stk(t_stk **a, t_stk **b)
 {
 	int	size;
 
@@ -19,8 +19,8 @@ static void	sort_stacks(t_stacks **a, t_stacks **b)
 
 int	main(int argc, char **argv)
 {
-	t_stacks	*stack_a;
-	t_stacks	*stack_b;
+	t_stk	*stack_a;
+	t_stk	*stack_b;
 
 	if (argc < 2)
 		return (0);
@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 	stack_a = parsing(&argv[1]);
 	stack_b = NULL;
 	if (!in_order(&stack_a, 'a', NULL))
-		sort_stacks(&stack_a, &stack_b);
+		sort_stk(&stack_a, &stack_b);
 	end_all(stack_a, stack_b, 0);
 	return (0);
 }

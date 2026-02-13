@@ -5,9 +5,9 @@
  * @param l1 Pointer to attribute the lowest number.
  * @param l2 Pointer to attribute the 2nd lowest.
  * NULL if you only need the lowest. */
-void	get_lowest(t_stacks *stack, int *l1, int *l2)
+void	get_lowest(t_stk *stack, int *l1, int *l2)
 {
-	t_stacks	*tmp;
+	t_stk	*tmp;
 
 	tmp = stack;
 	*l1 = tmp->nbr;
@@ -31,9 +31,9 @@ void	get_lowest(t_stacks *stack, int *l1, int *l2)
  * @param stack Stack to search on.
  * @param h1 Pointer to attribute the highest number.
  * @param h2 Pointer to attribute the 2nd highest. NULL if you only want one */
-void	get_highest(t_stacks *stack, int *h1, int *h2)
+void	get_highest(t_stk *stack, int *h1, int *h2)
 {
-	t_stacks	*tmp;
+	t_stk	*tmp;
 
 	tmp = stack;
 	*h1 = tmp->nbr;
@@ -57,10 +57,10 @@ void	get_highest(t_stacks *stack, int *h1, int *h2)
  * @param stack Linked list to search on.
  * @param nbr	Number you're looking for.
  * @return Index of the node that number was found. */
-int	get_index(t_stacks *stack, int nbr)
+int	get_index(t_stk *stack, int nbr)
 {
-	int			i;
-	t_stacks	*tmp;
+	int		i;
+	t_stk	*tmp;
 
 	if (!stack)
 		return (0);
@@ -82,12 +82,12 @@ int	get_index(t_stacks *stack, int nbr)
  * @param nbr	Number to be put on right location in stack.
  * @return Amount of rotation (or reverse) the stack had to do
  * to find the place. */
-int	get_rotation(t_stacks *stack, int nbr)
+int	get_rotation(t_stk *stack, int nbr)
 {
-	int			last_value;
-	int			rotate;
-	int			size;
-	t_stacks	*tmp;
+	int		last_value;
+	int		rotate;
+	int		size;
+	t_stk	*tmp;
 
 	tmp = stack;
 	rotate = 0;

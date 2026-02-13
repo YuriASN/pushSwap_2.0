@@ -8,7 +8,7 @@
  * If not, send NULL.
  * @return Amount of chars writted to stdout. 0 in case nothing
  * needs to be written or exist. -1 in case of error. */
-void	swap(t_stacks *stack, char id, t_stacks *error)
+void	swap(t_stk *stack, char id, t_stk *error)
 {
 	int	tmp;
 
@@ -31,9 +31,9 @@ void	swap(t_stacks *stack, char id, t_stacks *error)
  * @param id	Flag of the stack that the node is coming from.
  * @return Amout of chars written. 0 if list doesn't exist.
  * -1 in case of error. */
-void	push(t_stacks **stack_from, t_stacks **stack_to, char id)
+void	push(t_stk **stack_from, t_stk **stack_to, char id)
 {
-	t_stacks	*tmp;
+	t_stk	*tmp;
 
 	if (!*stack_from)
 		return ;
@@ -59,9 +59,9 @@ void	push(t_stacks **stack_from, t_stacks **stack_to, char id)
  * If not, send NULL.
  * @return	Amount of chars writted to stdout. 0 in case nothing
  * needs to be written or exist. -1 in case of error. */
-void	rotate(t_stacks **stack, char id, t_stacks *error)
+void	rotate(t_stk **stack, char id, t_stk *error)
 {
-	t_stacks	*tmp;
+	t_stk	*tmp;
 
 	if (!(*stack)->next)
 		return ;
@@ -85,10 +85,10 @@ void	rotate(t_stacks **stack, char id, t_stacks *error)
  * If not, send NULL.
  * @return	Amount of chars writted to stdout. 0 in case nothing
  * needs to be written or exist. -1 in case of error. */
-void	rev_rotate(t_stacks **stack, char id, t_stacks *error)
+void	rev_rotate(t_stk **stack, char id, t_stk *error)
 {
-	t_stacks	*tmp;
-	t_stacks	*last;
+	t_stk	*tmp;
+	t_stk	*last;
 
 	if (!(*stack)->next)
 		return ;
@@ -111,7 +111,7 @@ void	rev_rotate(t_stacks **stack, char id, t_stacks *error)
  * @param a Pointer to linked list a.
  * @param b Pointer to linked list b.
  * @param way TRUE if is normal rotation, FALSE if is reverse. */
-void	double_rotation(t_stacks **a, t_stacks **b, t_bool way)
+void	double_rotation(t_stk **a, t_stk **b, t_bool way)
 {
 	if (!*a || !*b)
 		return ;

@@ -5,7 +5,7 @@
  * @param str String where the number is at.
  * @param node The node to receive the value.
  * @return True if number was passed, False if number exceeds int min or max. */
-static t_bool	get_number(char **str, t_stacks *node)
+static t_bool	get_number(char **str, t_stk *node)
 {
 	int		nbr;
 
@@ -26,15 +26,15 @@ static t_bool	get_number(char **str, t_stacks *node)
  * and return the head of linked list.
  * @param arg String with number or numbers to be added.
  * @return Head of the linked list created. */
-static t_stacks	*stack_init(char *arg)
+static t_stk	*stack_init(char *arg)
 {
-	t_stacks	*head;
-	t_stacks	*new;
+	t_stk	*head;
+	t_stk	*new;
 
 	head = NULL;
 	while (*arg)
 	{
-		new = ft_calloc(1, sizeof(t_stacks));
+		new = ft_calloc(1, sizeof(t_stk));
 		if (!new)
 			end_all(head, NULL, ALLOCATION_ERROR);
 		new->next = NULL;
@@ -54,10 +54,10 @@ static t_stacks	*stack_init(char *arg)
  * @param args List of arguments received by the program.
  * @return The head of the linked list generated,
  * or NULL if any error occurs. */
-t_stacks	*parsing(char **args)
+t_stk	*parsing(char **args)
 {
-	t_stacks	*head;
-	int			i;
+	t_stk	*head;
+	int		i;
 
 	if (!args || !*args)
 		error_msg(INVALID_ARGS);

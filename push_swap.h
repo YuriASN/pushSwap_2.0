@@ -21,54 +21,53 @@ typedef struct	s_stacks
 	int				nbr;
 	//struct s_stacks	*prev;
 	struct s_stacks	*next;
-}		t_stacks;
-
+}		t_stk;
 
 //PARSE
 
-t_stacks	*parsing(char **args);
+t_stk	*parsing(char **args);
 
 //Argument checkers
 
-void		empty_arg(char **args);
-void		valid_args(char **args);
-void		duplicate_check(int nbr, t_stacks *stack);
+void	empty_arg(char **args);
+void	valid_args(char **args);
+void	duplicate_check(int nbr, t_stk *stack);
 
 //Commands
 
-void		swap(t_stacks *stack, char id, t_stacks *error);
-void		push(t_stacks **stack_from, t_stacks **stack_to, char id);
-void		rotate(t_stacks **stack, char id, t_stacks *error);
-void		rev_rotate(t_stacks **stack, char id, t_stacks *error);
-void		double_rotation(t_stacks **a, t_stacks **b, t_bool way);
+void	swap(t_stk *stack, char id, t_stk *error);
+void	push(t_stk **stack_from, t_stk **stack_to, char id);
+void	rotate(t_stk **stack, char id, t_stk *error);
+void	rev_rotate(t_stk **stack, char id, t_stk *error);
+void	double_rotation(t_stk **a, t_stk **b, t_bool way);
 
 //End program
 
-void		error_msg(int err_no);
-void		end_all(t_stacks *a, t_stacks *b, int err_no);
+void	error_msg(int err_no);
+void	end_all(t_stk *a, t_stk *b, int err_no);
 
 // Getters
-void		get_lowest(t_stacks *stack, int *l1, int *l2);
-void		get_highest(t_stacks *stack, int *h1, int *h2);
-int			get_index(t_stacks *stack, int nbr);
-int			get_rotation(t_stacks *stack, int nbr);
+void	get_lowest(t_stk *stack, int *l1, int *l2);
+void	get_highest(t_stk *stack, int *h1, int *h2);
+int		get_index(t_stk *stack, int nbr);
+int		get_rotation(t_stk *stack, int nbr);
 
 //Helpers
 
-t_stacks	*stack_last(t_stacks *stack);
-void		rotate_amount(t_stacks **stack, int roll, char id, t_stacks *error);
-void		best_rotation(t_stacks **stack, int nbr, char id, t_stacks *error);
-t_bool		in_order(t_stacks **stack, char id, t_stacks *error);
+t_stk	*stack_last(t_stk *stack);
+void	rotate_amount(t_stk **stack, int roll, char id, t_stk *error);
+void	best_rotation(t_stk **stack, int nbr, char id, t_stk *error);
+t_bool	in_order(t_stk **stack, char id, t_stk *error);
 
 //Order
 
-void		sort_three(t_stacks **a, t_stacks **b, t_bool rotate_b);
-void		sort_five(t_stacks **a, t_stacks **b, int size);
-void		sort_big(t_stacks **a, t_stacks **b);
+void	sort_three(t_stk **a, t_stk **b, t_bool rotate_b);
+void	sort_five(t_stk **a, t_stk **b, int size);
+void	sort_big(t_stk **a, t_stk **b);
 
 //Longest Increasing Subsequence
 
-int			get_lis(t_stacks *a, int *lis);
-void		push_lis(t_stacks **a, t_stacks **b, int *lis, int size);
+int		get_lis(t_stk *a, int *lis);
+void	push_lis(t_stk **a, t_stk **b, int *lis, int size);
 
 #endif

@@ -13,7 +13,7 @@ void	empty_arg(char **args)
 	{
 		i = 0;
 		while (args[j][i] && ft_isspace(args[j][i]))
-				++i ;
+			++i ;
 		if (!args[j][i])
 			error_msg(EMPTY_ARGS);
 	}
@@ -55,9 +55,9 @@ void	valid_args(char **args)
  * as it's where nbr comes from. If so, exists safely the program.
  * @param nbr Number on first node to compared with others.
  * @param stack Second node of the stack, to compare from it, to the end.*/
-void	duplicate_check(int nbr, t_stacks *stack)
+void	duplicate_check(int nbr, t_stk *stack)
 {
-	t_stacks	*tmp;
+	t_stk	*tmp;
 
 	tmp = stack;
 	while (tmp->next)
