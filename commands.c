@@ -119,14 +119,14 @@ void	double_rotation(t_stk **a, t_stk **b, t_bool way)
 	{
 		rotate(a, (char)0, *b);
 		rotate(b, (char)0, *a);
-		if (ft_putendl_fd("rr", 2) == -1)
+		if (ft_putendl_fd("rr", 1) == -1)
 			end_all(*a, *b, WRITE_ERROR);
 	}
 	else
 	{
 		rev_rotate(a, (char)0, *b);
 		rev_rotate(b, (char)0, *a);
-		if (ft_putendl_fd("rrr", 2) == -1)
+		if (ft_putendl_fd("rrr", 1) == -1)
 			end_all(*a, *b, WRITE_ERROR);
 	}
 }
