@@ -18,6 +18,25 @@ static t_bool	is_on_lis(int nbr, int *lis, int size)
 	return (FALSE);
 }
 
+/** @brief Sees if the nbr_b fits on the place before nubr_a, on the array.
+ * @param nbr_a Number on the array that will be compared.
+ * @param nbr_b Number that will try to fit before the nbr_a.
+ * @param lis Array of int that will see on it if nbr_b fits before nbr_a.
+ * @param size Size of the array passed as parameter.
+ * @return True if number fits there. False if not. */
+static t_bool	on_lis_pos(int nbr_a, int nbr_b, int *lis, int size)
+{
+	int	i;
+
+	i = -1;
+	while (++i < size)
+		if (nbr_a == lis[i])
+			break ;
+	if (nbr_b < nbr_a && (i == 0 || nbr_b > lis[i - 1]))
+		return (TRUE);
+	return (FALSE);
+}
+
 /** @brief Pushes all the numbers that aren't on lis, from a to b.
  * @param a Pointer to the first node of the list to look for.
  * @param b Pointer to the first node of the list to push for.
@@ -33,7 +52,14 @@ void	push_lis(t_stk **a, t_stk **b, int *lis, int size)
 	while (a_size--)
 	{
 		if (is_on_lis((*a)->nbr, lis, size))
+		{
+			if (*b && on_lis_pos((*a)->nbr, (*b)->nbr, lis, size))
+			{
+				push(b, a, 'b');
+				rotate(a, 'a', *b);
+			}
 			rotate(a, 'a', *b);
+		}
 		else
 		{
 			pushes--;
