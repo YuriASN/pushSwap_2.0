@@ -93,6 +93,8 @@ int	push_rotation(t_stk *stack, int nbr)
 	rotate = 0;
 	last_value = stack_last(stack)->nbr;
 	size = ft_lstsize((t_list *)stack);
+	if (size < 2)
+		return (0);
 	while (tmp)
 	{
 		if ((nbr < tmp->nbr && (last_value > tmp->nbr || nbr > last_value))
