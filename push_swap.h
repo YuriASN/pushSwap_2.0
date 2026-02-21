@@ -56,6 +56,7 @@ t_stk	*stack_last(t_stk *stack);
 void	rotate_amount(t_stk **stack, int roll, char id, t_stk *error);
 int		best_rotation(t_stk *stack, int nbr);
 t_bool	in_order(t_stk **stack, char id, t_stk *error);
+t_bool	is_on_lis(int nbr, int *lis, int size);
 
 //Order
 

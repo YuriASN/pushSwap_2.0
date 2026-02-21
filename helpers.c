@@ -80,3 +80,21 @@ t_bool	in_order(t_stk **stack, char id, t_stk *error)
 		rotate_amount(stack, best_rotation(*stack, low), id, error);
 	return (TRUE);
 }
+
+/** @brief Checks if number is on the array of int.
+ * @param nbr Number to be searched for.
+ * @param lis Array of int to search on.
+ * @param size Size of the array.
+ * @return True if number is found, False if not. */
+t_bool	is_on_lis(int nbr, int *lis, int size)
+{
+	int	i;
+
+	i = -1;
+	while (++i < size)
+	{
+		if (nbr == lis[i])
+			return (TRUE);
+	}
+	return (FALSE);
+}

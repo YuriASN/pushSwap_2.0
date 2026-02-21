@@ -1,24 +1,6 @@
 #include "push_swap.h"
 
-/** @brief Checks if number is on the array of int.
- * @param nbr Number to be searched for.
- * @param lis Array of int to search on.
- * @param size Size of the array.
- * @return True if number is found, False if not. */
-static t_bool	is_on_lis(int nbr, int *lis, int size)
-{
-	int	i;
-
-	i = -1;
-	while (++i < size)
-	{
-		if (nbr == lis[i])
-			return (TRUE);
-	}
-	return (FALSE);
-}
-
-/** @brief Sees if the nbr_b fits on the place before nubr_a, on the array.
+/** @brief Sees if the nbr_b fits on the position before nbr_a, on the array.
  * @param nbr_a Number on the array that will be compared.
  * @param nbr_b Number that will try to fit before the nbr_a.
  * @param lis Array of int that will see on it if nbr_b fits before nbr_a.
