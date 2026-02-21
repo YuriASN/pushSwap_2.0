@@ -23,6 +23,8 @@ t_stk	*stack_last(t_stk *stack)
  * @param error The other linked list to work with it in case of error. */
 void	rotate_amount(t_stk **stack, int roll, char id, t_stk *error)
 {
+	if (!roll)
+		return ;
 	if (roll > 0)
 		while (roll--)
 			rotate(stack, id, error);
