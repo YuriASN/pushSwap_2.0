@@ -15,7 +15,7 @@
 # define WRITE_ERROR 7
 
 typedef int		t_bool;
-typedef struct	s_stacks
+typedef struct s_stacks
 {
 	int				nbr;
 	struct s_stacks	*next;
