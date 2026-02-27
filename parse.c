@@ -26,27 +26,24 @@ static t_bool	get_number(char **str, t_stk *node)
  * and return the head of linked list.
  * @param arg String with number or numbers to be added.
  * @return Head of the linked list created. */
-static t_stk	*stack_init(char *arg)
+static void	stack_init(char *arg, t_stk **head)
 {
-	t_stk	*head;
 	t_stk	*new;
 
-	head = NULL;
 	while (*arg)
 	{
 		new = ft_calloc(1, sizeof(t_stk));
 		if (!new)
-			end_all(head, NULL, ALLOCATION_ERROR);
+			end_all(*head, NULL, ALLOCATION_ERROR);
 		new->next = NULL;
-		if (head)
-			(stack_last(head))->next = new;
+		if (*head)
+			(stack_last(*head))->next = new;
 		else
-			head = new;
+			*head = new;
 		if (!get_number(&arg, new))
-			end_all(head, NULL, INT_OVERFLOW);
-		duplicate_check(new->nbr, head);
+			end_all(*head, NULL, INT_OVERFLOW);
+		duplicate_check(new->nbr, *head);
 	}
-	return (head);
 }
 
 /** @brief Check if content of args are valid, and if so,
@@ -63,9 +60,9 @@ t_stk	*parsing(char **args)
 		error_msg(INVALID_ARGS);
 	empty_arg(args);
 	valid_args(args);
-	head = stack_init(args[0]);
-	i = 0;
+	head = NULL;
+	i = -1;
 	while (args[++i])
-		stack_last(head)->next = stack_init(args[i]);
+		stack_init(args[i], &head);
 	return (head);
 }
