@@ -44,26 +44,21 @@ order the 3 left (if !in_order() -> sort_three()) and push the 2 back */
 void	sort_five(t_stk **a, t_stk **b, int size)
 {
 	t_bool	rotate_b;
-	int		lower1;
-	int		lower2;
 
 	rotate_b = FALSE;
-	get_lowest(*a, &lower1, &lower2);
-	if (size == 5 && best_rotation(*a, lower1) > best_rotation(*a, lower2))
-	{
-		rotate_b = TRUE;
-		ft_intswap(&lower1, &lower2);
-	}
-	rotate_amount(a, best_rotation(*a, lower1), 'a', *b);
 	push(a, b, 'a');
 	if (size == 5)
-	{
-		rotate_amount(a, best_rotation(*a, lower2), 'a', *b);
 		push(a, b, 'a');
-	}
+	if (size == 5 && (*b)->nbr < (*b)->next->nbr)
+		rotate_b = TRUE;
 	if (!in_order(a, 'a', *b))
 		sort_three(a, b, rotate_b);
+	rotate_amount(a, push_rotation(*a, (*b)->nbr), 'a', *b);
 	push(b, a, 'b');
 	if (size == 5)
+	{
+		rotate_amount(a, push_rotation(*a, (*b)->nbr), 'a', *b);
 		push(b, a, 'b');
+	}
+	in_order(a, 'a', *b);
 }
