@@ -21,9 +21,35 @@ Push swap is a program that will sort the integers in ascending order with the f
 
 ## Instructions
 
+To use the program you first need compile the executable, run:
+
+```bash
+make
+```
+
+The program takes integers as argument and output the movements needed to set them on a increasing order. Any other argument that isn't an integer will result in an error.  
+
+An example of a proper use can be any of the following:  
+```bash
+./push_swap 3 41234 454 123 5425
+./push_swap "3" "41234" "-454 123 5425"
+./push_swap 3 41234 "454 -123 5425"
+```
+
 ## Resources
 
-libft  ***************
+libft functions used:  
+
+| **Function**	| **Description**	|
+|		---		|			---		|
+| **ft_isspace()** | Boolean checking if the char received as an argument is a space on the ASCII table. |
+| **ft_isdigit()**| Boolean checking for a digit (0 through 9). |
+| **ft_putendl_fd()**| Outputs the string `s` to the file descriptor fd followed by a `\n`. |
+| **ft_lstsize()**| Returns the number of nodes in the list. |
+| **ft_abs()**| Returns the absolute (positive) value of a int. |
+| **ft_calloc()**| Allocates memory of `num` elements of size `bytes` each, every byte is set to 0. Returns the pointer to allocated memory. |
+| **ft_atoi()**| Converts the initial portion of the string pointed to by str to int. |
+| **ft_atoi_overflow()**| Checks if number on the string will result on a int overflow. |
 
 External Funtions used:
 | **Function**	| **Description**	|
@@ -55,3 +81,9 @@ Then it does a check-up in what number is bigger or than the others to see what 
 ### Sort Five
 This works with five or four numbers, by pushing the 2 (or 1 in case of 4 arguments) lowests numbers to stack b. It will push using the least amount of rotation possible, so if the lowest end on top of stack `b`, it'll be flagged to rotate. The rotation is needed so that when they are pushed back to `a` everything will be already on order.    
 After it'll organize stack `a` by calling `in_order()` and if that didin't solved, it'll call `sort_three()`. Sorthing the three, the `rotate_b` flag, signalizes if a double rotation can be done, using in that case 1 less command. After that, all that's left is to push number(s) in `b` back to `a`.  
+
+### Sort Biggers
+For 6 or more arguments the algorithm is the same. Altough it isn't the greatest for large amount of arguments *(500)*, it still handles with the amount of moves asked by the subject.  
+It was used the **Longest Incresing Subsequence** *(LIS)*, to find the numbers that are already in order and push the others to stack `B`. It get the LIS starting from each number on the stack, to find the longest LIS possible **but also taking into consideration the amount of rotation needed to get to it**. Before the number is pushed to `B`, it sees if a `swap` can be done, to simplily set that current number on it's right location.  
+Then it sees from each node on the `B` stack, how many moves, on `A` and `B`, are needed to set them on the right position. Once we know wich node does less moves it does it, and do it all over until stack B is empty.  
+From that, it calls a `in_order()` to rotate the stack `A` in order to leave the lowest number on top, having then the stack on order.  
