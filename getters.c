@@ -108,3 +108,27 @@ int	push_rotation(t_stk *stack, int nbr)
 		return (rotate);
 	return (rotate - size);
 }
+
+/** @brief Checks if next number on the stack is a better option for LIS.
+ * If it is lower than the current, but higher than the last saved.
+ * @param curr Current node of the stack.
+ * @param last_low Value of last LIS number.
+ * @param head First node of the stack.
+ * @param first Value of first node that was searched on.
+ * @return True if next number is a better option, False if not. */
+t_bool	next_better(t_stk *curr, int last_low, t_stk *head, int first)
+{
+	int	curr_nbr;
+	int	next_number;
+
+	curr_nbr = curr->nbr;
+	if (!curr->next)
+		next_number = head->nbr;
+	else
+		next_number = curr->next->nbr;
+	if (next_number == first)
+		return (FALSE);
+	if (next_number < curr_nbr && next_number > last_low)
+		return (TRUE);
+	return (FALSE);
+}

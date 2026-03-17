@@ -19,6 +19,42 @@ static t_bool	on_lis_pos(int nbr_a, int nbr_b, int *lis, int size)
 	return (FALSE);
 }
 
+//Prevents extra pushes for numbers that are easy to put in place.
+/** @brief Swap the args to fix it's order or fix normally if size of stack = 3.
+ * @param stk Pointer to the first node of the stack to swap if possible.
+ * @param error Other stack to handle in case of an error.
+ * @param lis Array with LIS numbers.
+ * @param lis_size Size of lis.
+ * @return True if swap or fix was done. False if not. */
+static t_bool	can_swap(t_stk **stk, t_stk *error, int *lis, int lis_size)
+{
+	int		highest;
+	int		last_n;
+	t_stk	*nxt_lis;
+
+	if (ft_lstsize((t_list *)*stk) == 3)
+	{
+		sort_three(stk, &error, FALSE);
+		return (TRUE);
+	}
+	get_highest(*stk, &highest, NULL);
+	last_n = stack_last(*stk)->nbr;
+	nxt_lis = (*stk)->next;
+	while (nxt_lis->next && is_on_lis(nxt_lis->nbr, lis, lis_size) == FALSE)
+		nxt_lis = nxt_lis->next;
+	if (is_on_lis((*stk)->next->nbr, lis, lis_size) == TRUE
+		&& (*stk)->nbr > (*stk)->next->nbr
+		&& (*stk)->nbr < nxt_lis->nbr
+		&& (highest == last_n || ((*stk)->next->nbr > last_n
+				&& is_on_lis(last_n, lis, lis_size))))
+	{
+		swap(*stk, 'a', error);
+		rotate_amount(stk, 2, 'a', error);
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
 /** @brief Pushes all the numbers that aren't on lis, from a to b.
  * @param a Pointer to the first node of the list to look for.
  * @param b Pointer to the first node of the list to push for.
@@ -45,35 +81,12 @@ void	push_lis(t_stk **a, t_stk **b, int *lis, int size)
 		else
 		{
 			pushes--;
-			push(a, b, 'a');
+			if (!can_swap(a, *b, lis, size))
+				push(a, b, 'a');
 		}
 		if (!pushes)
 			break ;
 	}
-}
-
-/** @brief Checks if next number on the stack is a better option for LIS.
- * If it is lower than the current, but higher than the last saved.
- * @param curr Current node of the stack.
- * @param last_low Value of last LIS number.
- * @param head First node of the stack.
- * @param first Value of first node that was searched on.
- * @return True if next number is a better option, False if not. */
-static t_bool	next_better(t_stk *curr, int last_low, t_stk *head, int first)
-{
-	int	curr_nbr;
-	int	next_number;
-
-	curr_nbr = curr->nbr;
-	if (!curr->next)
-		next_number = head->nbr;
-	else
-		next_number = curr->next->nbr;
-	if (next_number == first)
-		return (FALSE);
-	if (next_number < curr_nbr && next_number > last_low)
-		return (TRUE);
-	return (FALSE);
 }
 
 /** @brief Finds the LIS starting on a given node,

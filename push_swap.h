@@ -49,6 +49,7 @@ void	get_lowest(t_stk *stack, int *l1, int *l2);
 void	get_highest(t_stk *stack, int *h1, int *h2);
 int		get_index(t_stk *stack, int nbr);
 int		push_rotation(t_stk *stack, int nbr);
+t_bool	next_better(t_stk *curr, int last_low, t_stk *head, int first);
 
 //Helpers
 
