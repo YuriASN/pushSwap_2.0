@@ -36,6 +36,15 @@ An example of a proper use can be any of the following:
 ./push_swap 3 41234 "454 -123 5425"
 ```
 
+To do tests without the need to write all the arguments you can do the following command:  
+```bash
+ARG=$(seq 0 499 | shuf); ./push_swap $ARG | ./checker_linux $ARG
+```
+And to see how many movements it did, you can run:
+```bash
+ARG=$(seq 0 499 | shuf); ./push_swap $ARG | wc -l
+```
+
 ## Resources
 
 libft functions used:  
@@ -84,6 +93,6 @@ After it'll organize stack `a` by calling `in_order()` and if that didin't solve
 
 ### Sort Biggers
 For 6 or more arguments the algorithm is the same. Altough it isn't the greatest for large amount of arguments *(500)*, it still handles with the amount of moves asked by the subject.  
-It was used the **Longest Incresing Subsequence** *(LIS)*, to find the numbers that are already in order and push the others to stack `B`. It get the LIS starting from each number on the stack, to find the longest LIS possible **but also taking into consideration the amount of rotation needed to get to it**. Before the number is pushed to `B`, it sees if a `swap` can be done, to simplily set that current number on it's right location.  
+It was used the **Longest Incresing Subsequence** *(LIS)*, to find the numbers that are already in order and push the others to stack `B`. It get the LIS starting from each number on the stack, to find the longest LIS possible. Before the number is pushed to `B`, it sees if a `swap` can be done, to simplily set that current number on it's right location.  
 Then it sees from each node on the `B` stack, how many moves, on `A` and `B`, are needed to set them on the right position. Once we know wich node does less moves it does it, and do it all over until stack B is empty.  
 From that, it calls a `in_order()` to rotate the stack `A` in order to leave the lowest number on top, having then the stack on order.  
